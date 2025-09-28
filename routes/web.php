@@ -18,6 +18,10 @@ use App\Http\Controllers\FireResistanceController;
 
 use App\Http\Controllers\SectionController;
 
+use App\Http\Controllers\WindLoadController;
+
+use App\Http\Controllers\ConnectionController;
+
 Route::get('/', fn() => redirect()->route('analysis.index'));
 
 Route::get('/load-combinations', [LoadCombinationController::class, 'index'])->name('load_combinations.index');
@@ -65,3 +69,32 @@ Route::prefix('fire')->group(function () {
 });
 
 Route::get('/sections', [SectionController::class, 'index'])->name('sections.index');
+
+Route::prefix('windload')->group(function () {
+    Route::get('/tcvn-2737-2023', [WindLoadController::class, 'tcvn27372023'])
+        ->name('windload.tcvn27372023');
+    Route::get('/asce-7-10', [WindLoadController::class, 'asce710'])
+        ->name('windload.asce710');
+});
+
+Route::prefix('connection')->group(function () {
+    Route::get('/tcvn-2737-2023', [WindLoadController::class, 'tcvn27372023'])
+        ->name('windload.tcvn27372023');
+    Route::get('/asce-7-10', [WindLoadController::class, 'asce710'])
+        ->name('windload.asce710');
+});
+
+Route::prefix('connections')->name('connections.')->group(function () {
+    // Trang danh sách
+    Route::get('/', [ConnectionController::class, 'index'])->name('index');
+
+    // Form nhập dữ liệu
+    Route::get('/{type}/{standard}', [ConnectionController::class, 'create'])
+        ->where(['type' => '[a-z]+', 'standard' => '[a-z0-9\-]+'])
+        ->name('create');
+
+    // Xử lý tính toán
+    Route::post('/{type}/{standard}', [ConnectionController::class, 'calculate'])
+        ->where(['type' => '[a-z]+', 'standard' => '[a-z0-9\-]+'])
+        ->name('calculate');
+});

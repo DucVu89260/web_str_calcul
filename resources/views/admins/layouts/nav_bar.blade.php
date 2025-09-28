@@ -42,6 +42,27 @@
                     <a class="dropdown-item" href="{{ route('sections.index') }}">Steel Sections</a>
                 </div>
             </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarSites" role="button" data-toggle="dropdown">
+                    Wind Load
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ route('windload.tcvn27372023') }}">TCVN 2737-2023</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarConnections" role="button" data-toggle="dropdown">
+                    Connections
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ route('connections.index') }}">Danh sách liên kết</a>
+                    <a class="dropdown-item" href="{{ route('connections.create', ['type' => 'moment', 'standard' => 'aisc360-10']) }}">
+                        Tạo Moment (AISC 360-10)
+                    </a>
+                </div>
+            </li>
         </ul>
     </div>
 </nav>
